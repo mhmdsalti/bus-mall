@@ -5,8 +5,10 @@ function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+
 let clickNo =0;
 const rounds =25;
+const iterations = [];
 const names = [
     'bag',
     'banana',
@@ -34,12 +36,12 @@ const leftImage = document.getElementById('left-image');
 const middleImage = document.getElementById('middle-image');
 const rightImage = document.getElementById('right-image');
 const sectionButon = document.getElementById('sectionButton');
+const imageSection = document.getElementById('images-section');
 
 console.log(leftImage);
 console.log(middleImage);
 console.log(rightImage);
 
-const imageSection = document.getElementById('images-section');
 
 function BussMall(name) {
     this.name = name;
@@ -66,42 +68,19 @@ function BussMall(name) {
     // Left Image
 
     let leftIndex = randomNumber(0, BussMall.all.length - 1);
-
-
-    
-    
-    if (BussMall.all[leftIndex].name === 'sweep') {
-      BussMall.all[leftIndex].path = "./images/sweep.png";
-  } else if (BussMall.all[leftIndex].name === 'usb') {
-    BussMall.all[leftIndex].path = "./images/usb.gif";
-  } else {
-    leftImage.src = BussMall.all[leftIndex].path;
-  }
-
-
     leftImage.src = BussMall.all[leftIndex].path ;
     leftImage.title = BussMall.all[leftIndex].name;
     leftImage.alt = BussMall.all[leftIndex].name;
   
     //  Middle Image 
+    
     let middleIndex = randomNumber(0, BussMall.all.length - 1);
-
-    
-    
-    if (BussMall.all[middleIndex].name === 'sweep') {
-      BussMall.all[middleIndex].path = "./images/sweep.png";
-  } else if (BussMall.all[middleIndex].name === 'usb') {
-    BussMall.all[middleIndex].path = "./images/usb.gif";
-  } 
-  
-   
   while (middleIndex === leftIndex) {
     middleIndex = randomNumber(0, names.length -1);
     if(middleIndex !== leftIndex) {
       break;
     }
   }
-
     middleImage.src = BussMall.all[middleIndex].path;
     middleImage.title = BussMall.all[middleIndex].name;
     middleImage.alt = BussMall.all[middleIndex].name;
@@ -109,18 +88,6 @@ function BussMall(name) {
     // Right Image
 
     let rightIndex = randomNumber(0, BussMall.all.length - 1);
-
-   
-    
-    if (BussMall.all[rightIndex].name === 'sweep') {
-      BussMall.all[rightIndex].path = "./images/sweep.png";
-  } else if (BussMall.all[rightIndex].name === 'usb') {
-    BussMall.all[rightIndex].path = "./images/usb.gif";
-  }else {
-    rightIndex = randomNumber(0, names.length -1);
-
-  }
-
   while (middleIndex !== leftIndex) {
     rightIndex = randomNumber(0, names.length -1);
     
@@ -191,18 +158,18 @@ function handleButton(event) {
 function createChart() {
   const ctx = document.getElementById('resultChart').getContext('2d');
 
-  const imageVotes = [];
-  const imageViews = [];
+  const busMallVotes = [];
+  const busmallViews = [];
 
   for (let i = 0; i < BussMall.all.length; i++) {
-    imageVotes.push(BussMall.all[i].votes);
-    imageViews.push(BussMall.all[i].views);
+    busMallVotes.push(BussMall.all[i].votes);
+    busmallViews.push(BussMall.all[i].views);
   }
   const chart = new Chart(ctx, {
-    // The type of chart we want to create
+    // The type of chart 
     type: 'bar',
 
-    // The data for our dataset
+    // The data for  dataset
     data: {
       labels: names,
       datasets: [{
@@ -211,7 +178,7 @@ function createChart() {
         borderColor: 'yellow',
         borderWidth: 5,
         
-        data: imageVotes,
+        data: busMallVotes,
       },
       {
         label: '# of views',
@@ -219,7 +186,7 @@ function createChart() {
         borderColor: 'lightgreen',
         borderWidth: 5,
         
-        data: imageViews,
+        data: busmallViews,
       }]
     },
 
@@ -229,6 +196,18 @@ function createChart() {
     }
   });
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
