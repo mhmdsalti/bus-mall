@@ -1,4 +1,4 @@
-
+* 
 
 header  {
 background-color: black;
@@ -66,8 +66,9 @@ font-family: 'Pacifico', cursive;
     width : 300pxpx; 
     height : 128px;
     border-radius: 20%;
-
-    /* float: right; */
+    border: 50px solid transparent;
+    background-color: lightgreen;
+   
 display: inline-block;
     margin-top: 300px;
     margin-left: 200px;
@@ -76,9 +77,9 @@ display: inline-block;
  
 button {
 
-    float: left;
+    text-align: center;
     margin-top: 350px;
-margin-left: 100px;
+margin-left: 600px;
 font-size: 20px;
 border-radius: 50px;
 border:none;
@@ -111,4 +112,27 @@ text-align: center;
     color: yellow;
     font-size: large;
     font-family: 'Pacifico', cursive;
+}
+
+#resultShow {
+
+padding: 10px;
+margin: 10px;
+
+margin-left: 20px;
+width: 17%;
+}
+
+#resultShow {
+
+text-align: center;
+padding: 50px;
+
+}
+
+#resultChart {
+
+
+  width: 1000px;
+ 
 }
