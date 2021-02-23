@@ -6,31 +6,59 @@ function randomNumber(min, max) {
 }
 
 
+//extension extractor
+function getExt(filename) {
+  var idx = filename.lastIndexOf('.');
+  // handle cases like, .htaccess, filename
+  return (idx < 1) ? '' : filename.substr(idx + 1);
+}
+
+
+//name extractor
+function noExt(name){
+  forName.push(name.split('.').slice(0, -1).join('.'));
+  
+}
+
 let clickNo =0;
 const rounds =25;
-const iterations = [];
+const forName = [];
+const extension =[];
+const showed =[];
+
 const names = [
-    'bag',
-    'banana',
-    'bathroom',
-    'boots',
-    'breakfast',
-    'bubblegum',
-    'chair',
-    'cthulhu',
-    'dog-duck',
-    'dragon',
-    'pen',
-    'pet-sweep',
-    'scissors',
-    'shark',
-    'sweep',
-    'tauntaun',
-    'unicorn',
-    'usb',
-    'water-can',
-    'wine-glass',
+  'bag.jpg',
+  'banana.jpg',
+  'bathroom.jpg',
+  'boots.jpg',
+  'breakfast.jpg',
+  'bubblegum.jpg',
+  'chair.jpg',
+  'cthulhu.jpg',
+  'dog-duck.jpg',
+  'dragon.jpg',
+  'pen.jpg',
+  'pet-sweep.jpg',
+  'scissors.jpg',
+  'shark.jpg',
+  'sweep.png',
+  'tauntaun.jpg',
+  'unicorn.jpg',
+  'usb.gif',
+  'water-can.jpg',
+  'wine-glass.jpg',
 ];
+
+for (let i = 0; i < names.length; i++) {
+  forName.push(names[i].split('.').slice(0, -1).join('.'));
+}
+console.log(names);
+
+//filling ext array without names
+for (let i = 0; i < names.length; i++) {
+  extension.push(getExt(names[i]));
+}
+console.log(extension);
 
 const leftImage = document.getElementById('left-image');
 const middleImage = document.getElementById('middle-image');
@@ -43,9 +71,11 @@ console.log(middleImage);
 console.log(rightImage);
 
 
-function BussMall(name) {
+
+
+function BussMall(name , extension) {
     this.name = name;
-    this.path = `./images/${name}.jpg ` ;
+    this.path = `./images/${name}`; 
    
     this.votes = 0;
     this.views = 0;
@@ -57,7 +87,7 @@ function BussMall(name) {
   BussMall.all=[];
 
   for (let i = 0; i < names.length; i++) {
-    new BussMall(names[i]);
+    new BussMall(names[i] ,extension[i]);
   }
   console.table(BussMall.all);
 
@@ -97,15 +127,27 @@ function BussMall(name) {
     } else{
     break;
   } 
+
   }
+
+  
     rightImage.src = BussMall.all[rightIndex].path;
     rightImage.title = BussMall.all[rightIndex].name;
     rightImage.alt = BussMall.all[rightIndex].name;
  
+
+    
+
+
     BussMall.all[leftIndex].views++;
     BussMall.all[middleIndex].views++;
     BussMall.all[rightIndex].views++;
-}
+
+    
+
+    }
+    
+
 
 render ();
 
@@ -129,6 +171,7 @@ console.log(clickNo);
 if(clickNo === rounds){
   console.log('rounds');
   imageSection.removeEventListener('click', handleClick);
+  updateList();
   
   const buttonEl = document.createElement('button');
   sectionButon.appendChild(buttonEl);
@@ -197,10 +240,19 @@ function createChart() {
   });
 }
 
+function updateList(){
+  let listString = JSON.stringify(BussMall.all);
+  localStorage.setItem('productOrders',listString);
+}
+function getList(){
+  let listString = localStorage.getItem('productOrders');
+  if(listString){
+    BussMall.all = JSON.parse(listString);
+  }
+}
 
 
-
-
+getList();
 
 
 
