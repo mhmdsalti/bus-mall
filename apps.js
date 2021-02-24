@@ -24,7 +24,7 @@ let clickNo =0;
 const rounds =25;
 const forName = [];
 const extension =[];
-const showed =[];
+
 
 const names = [
   'bag.jpg',
@@ -48,7 +48,7 @@ const names = [
   'water-can.jpg',
   'wine-glass.jpg',
 ];
-
+// to split the extension from the names
 for (let i = 0; i < names.length; i++) {
   forName.push(names[i].split('.').slice(0, -1).join('.'));
 }
@@ -71,7 +71,7 @@ console.log(middleImage);
 console.log(rightImage);
 
 
-
+// constructor
 
 function BussMall(name , extension) {
     this.name = name;
@@ -147,7 +147,7 @@ function BussMall(name , extension) {
 
     }
     
-
+// 
 
 render ();
 
@@ -168,9 +168,18 @@ function handleClick(event) {
 clickNo++;
 console.log(clickNo);
 
+
+ //  Remove listener
+
 if(clickNo === rounds){
   console.log('rounds');
+
+ 
+
+
   imageSection.removeEventListener('click', handleClick);
+
+  // local storage to save the items after we refresh the page
   updateList();
   
   const buttonEl = document.createElement('button');
@@ -241,13 +250,13 @@ function createChart() {
 }
 
 function updateList(){
-  let listString = JSON.stringify(BussMall.all);
-  localStorage.setItem('productOrders',listString);
+  let list = JSON.stringify(BussMall.all);
+  localStorage.setItem('products',list);
 }
 function getList(){
-  let listString = localStorage.getItem('productOrders');
-  if(listString){
-    BussMall.all = JSON.parse(listString);
+  let list = localStorage.getItem('products');
+  if(list){
+    BussMall.all = JSON.parse(list);
   }
 }
 
