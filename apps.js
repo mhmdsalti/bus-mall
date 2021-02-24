@@ -251,10 +251,10 @@ function createChart() {
 
 function updateList(){
   let list = JSON.stringify(BussMall.all);
-  localStorage.setItem('products',list);
+  localStorage.setItem('BusMall',list);
 }
 function getList(){
-  let list = localStorage.getItem('products');
+  let list = localStorage.getItem('BusMall');
   if(list){
     BussMall.all = JSON.parse(list);
   }
